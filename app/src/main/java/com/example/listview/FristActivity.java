@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.os.Message;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -14,14 +15,15 @@ public class FristActivity extends AppCompatActivity {
     private ListView listView;
     //加载适配器
     private ListAdapter listAdapter;
+    private  List<String > data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_frist);
-        listView=findViewById(R.id.first_list); //第二步 2
-        //创建数组添加数据
+        //第二步 2
+        listView = findViewById(R.id.first_list);
+        //创建数组添加数据源
         List<String>data = new ArrayList<>();
-
         data.add("blackpink");
         data.add("lisa");
         data.add("jisoo");

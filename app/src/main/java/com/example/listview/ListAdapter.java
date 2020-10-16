@@ -1,10 +1,14 @@
 package com.example.listview;
 
 import android.content.Context;
+import android.media.Image;
+import android.os.Message;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,24 +19,25 @@ import static android.view.LayoutInflater.from;
 
 public class ListAdapter extends BaseAdapter {
     private Context context;
-    private List<String> myData = new ArrayList<>();
+    private List<String> Datas;
     public ListAdapter(Context context, List<String> data){ //第二步 3传入数据
         this.context=context;
-        this.myData=data;
+        /*this.myData=data;*/
+        Datas = data;
 
     }
 
     public ListAdapter(FristActivity fristActivity) {
     }
-
+    /* 返回item个数*/
     @Override
-    public int getCount() {//list的和，用size判断大小
-        return myData.size();
+    public int getCount() {     //list的和，用size判断大小
+        return Datas.size();
     }
-
+    /*返回每一个item对象*/
     @Override
     public Object getItem(int position) {
-        return myData.get(position);
+        return Datas.get(position);
     }
 
     @Override
@@ -41,22 +46,26 @@ public class ListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
+    public View getView(int i, View view , ViewGroup viewGroup) {
         ViewHolder viewHolder;
-        if (convertView==null){
-            view  = from(context).inflate(R.layout.first_list_item,null);  //建立item1布局
+        if (view ==null){
             viewHolder = new ViewHolder();
-            viewHolder.textView = view.findViewById(R.id.text_item);
+            //建立item1布局
+            view  = from(context).inflate(R.layout.first_list_item,viewGroup,false);
+            viewHolder.imageView1 = view.findViewById(R.id.image1);
+            viewHolder.textView1 =  view.findViewById(R.id.text_item);
             view.setTag(viewHolder);
         }else {
-            view = convertView;
+           /* view = view ;*/
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        String str = myData.get(position);
-        viewHolder.textView.setText(str);
+        String str = Datas.get(i);
 
+        /*viewHolder.imageView1.setImageResource(Integer.parseInt(str));*/
+        viewHolder.textView1.setText(str);
+        
+        //此处需要返回view
         return view;
     }
 
@@ -64,7 +73,8 @@ public class ListAdapter extends BaseAdapter {
 
 
     class ViewHolder{
-        TextView textView;
+        private ImageView imageView1;
+        private TextView textView1;
     }
 
 
